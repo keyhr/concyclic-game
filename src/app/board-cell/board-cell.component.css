@@ -1,0 +1,37 @@
+.container {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: relative;
+}
+
+.container * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+
+.board-disc {
+  width: 65%;
+  height: 65%;
+  border-radius: 100%;
+  background-color: #000000;
+  z-index: 10;
+}
+
+.board-line {
+  width: 100%;
+  height: 100%;
+  background-color: #777777;
+  z-index: 1;
+}
+
+.board-line.vertical {
+  width: 10%;
+}
+
+.board-line.horizontal {
+  height: 10%;
+}
