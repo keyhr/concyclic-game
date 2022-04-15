@@ -1,10 +1,16 @@
-<div class="container">
-  <div class="info-tiles">
-    <div class="judge" [style.color]="judgeFontColor">{{judgeContent}}</div>
+<mat-toolbar color="primary">
+  <span class="title">共円チェッカー</span>
+</mat-toolbar>
+<div class="container" [style.width.px]=(containerSizePx)>
+  <div class="info-tiles" fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex></div>
+    <div class="judge" fxFlex="60" [style.color]="judge.fontColor">{{judge.content}}</div>
+    <div fxFlex></div>
+    <button mat-stroked-button fxFlex="20">Reset</button>
   </div>
   <div class="board">
     <div class="board-row" *ngFor="let row of board.board">
-      <app-board-cell *ngFor="let cell of row" [isPut]="cell.isPut" (clickEvent)="onCellClick(cell)" [sizePx]="50">
+      <app-board-cell *ngFor="let cell of row" [cell]="cell" (clickEvent)="onCellClick(cell)" [sizePx]="cellSizePx()">
       </app-board-cell>
     </div>
   </div>

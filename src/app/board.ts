@@ -4,6 +4,22 @@ export interface Cell {
   isPut: boolean;
 }
 
+export class Cell {
+  x: number;
+  y: number;
+  isPut: boolean;
+
+  constructor(x: number, y: number, isPut: boolean = false) {
+    this.x = x;
+    this.y = y;
+    this.isPut = isPut;
+  }
+
+  toggle(): void {
+    this.isPut = !this.isPut;
+  }
+}
+
 export class Board {
 
   width: number;
@@ -17,11 +33,7 @@ export class Board {
     for (let i = 0; i < height; ++i) {
       this.board[i] = new Array(width);
       for (let j = 0; j < width; ++j) {
-        this.board[i][j] = {
-          x: j,
-          y: i,
-          isPut: false,
-        };
+        this.board[i][j] = new Cell(j, i);
       }
     }
   }

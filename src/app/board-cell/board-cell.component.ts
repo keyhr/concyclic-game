@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Cell } from '../board';
 
 @Component({
   selector: 'app-board-cell',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class BoardCellComponent implements OnInit {
 
-  @Input() isPut: boolean = false;
+  @Input() cell?: Cell;
   @Input() sizePx: number = 100;
 
   @Output() clickEvent = new EventEmitter();
