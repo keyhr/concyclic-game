@@ -18,6 +18,10 @@ export class Cell {
   toggle(): void {
     this.isPut = !this.isPut;
   }
+
+  clear(): void {
+    this.isPut = false;
+  }
 }
 
 export class Board {
@@ -43,6 +47,10 @@ export class Board {
     for (const row of this.board) for (const cell of row) if (cell.isPut) ret.push(cell);
 
     return ret;
+  }
+
+  clear(): void {
+    for (const cell of this.cellsPut()) cell.clear();
   }
 
 }

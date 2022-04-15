@@ -6,11 +6,12 @@
     <div fxFlex></div>
     <div class="judge" fxFlex="60" [style.color]="judge.fontColor">{{judge.content}}</div>
     <div fxFlex></div>
-    <button mat-stroked-button fxFlex="20">Reset</button>
+    <button mat-stroked-button fxFlex="20" (click)="reset()">Reset</button>
   </div>
   <div class="board">
     <div class="board-row" *ngFor="let row of board.board">
-      <app-board-cell *ngFor="let cell of row" [cell]="cell" (clickEvent)="onCellClick(cell)" [sizePx]="cellSizePx()">
+      <app-board-cell class="board-cell" *ngFor="let cell of row" [cell]="cell" (clickEvent)="onCellClick(cell)"
+        [sizePx]="cellSizePx()">
       </app-board-cell>
     </div>
   </div>

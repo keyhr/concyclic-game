@@ -55,4 +55,9 @@ export class CheckerComponent implements OnInit {
     return this.containerSizePx / this.boardSize.x;
   }
 
+  reset(): void {
+    this.board.clear();
+    this.judge.content = '-';
+  }
+
 }
