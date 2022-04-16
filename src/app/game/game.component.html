@@ -1,0 +1,27 @@
+<mat-toolbar class="toolbar" color="primary">
+  <span class="title">ゲームモード</span>
+  <span class="spacer"></span>
+  <a mat-icon-button routerLink="/home">
+    <mat-icon>home</mat-icon>
+  </a>
+</mat-toolbar>
+<div class="container" [style.width.px]=(containerSizePx)>
+  <div *ngIf="isJudgingConcyclic">
+    石を3つ選択してください。
+  </div>
+  <div class="board">
+    <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
+  </div>
+  <div class="toolbuttons" fxLayout="row" fxLayoutAlign="space-around center">
+    <button *ngIf="!isJudgingConcyclic" mat-stroked-button fxFlex (click)="enterJudgeConcyclic()">共円宣言</button>
+    <button *ngIf="isJudgingConcyclic && board.cellsSelected().length != 4" mat-stroked-button fxFlex
+      (click)="cancelJudgeConcyclic()">キャンセル</button>
+    <button *ngIf="isJudgingConcyclic && board.cellsSelected().length == 4" mat-stroked-button fxFlex
+      (click)="judgeConcyclic()">共円判定</button>
+    <div *ngIf="!isJudgingConcyclic && cellHistory.length != 0" fxFlex="25" fxLayout="row"
+      fxLayoutAlign="space-around center">
+      <div fxFlex></div>
+      <button mat-stroked-button fxFlex="80" (click)="back()">一手戻る</button>
+    </div>
+  </div>
+</div>

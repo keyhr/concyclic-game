@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { CheckerComponent } from './checker/checker.component';
+import { GameComponent } from './game/game.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/checker', pathMatch: 'full' },
-  { path: 'checker', component: CheckerComponent }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'checker', component: CheckerComponent },
+  { path: 'game', component: GameComponent }
 ];
 
 @NgModule({

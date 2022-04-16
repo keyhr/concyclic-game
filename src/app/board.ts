@@ -8,19 +8,35 @@ export class Cell {
   x: number;
   y: number;
   isPut: boolean;
+  color: string;
+  isSelected: boolean;
 
   constructor(x: number, y: number, isPut: boolean = false) {
     this.x = x;
     this.y = y;
     this.isPut = isPut;
+    this.color = '#000000';
+    this.isSelected = false;
   }
 
   toggle(): void {
     this.isPut = !this.isPut;
   }
 
+  toggleSelect(highlightColor: string = 'red'): void {
+    if (this.isSelected) this.color = '#000000';
+    else this.color = highlightColor;
+    this.isSelected = !this.isSelected;
+  }
+
+  cancelSelect(): void {
+    this.isSelected = false;
+    this.color = '#000000';
+  }
+
   clear(): void {
     this.isPut = false;
+    this.cancelSelect();
   }
 }
 
@@ -45,6 +61,13 @@ export class Board {
   cellsPut(): Array<Cell> {
     let ret: Array<Cell> = new Array();
     for (const row of this.board) for (const cell of row) if (cell.isPut) ret.push(cell);
+
+    return ret;
+  }
+
+  cellsSelected(): Array<Cell> {
+    let ret: Array<Cell> = new Array();
+    for (const row of this.board) for (const cell of row) if (cell.isSelected) ret.push(cell);
 
     return ret;
   }
