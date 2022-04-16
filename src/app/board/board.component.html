@@ -1,0 +1,8 @@
+<div *ngIf="board">
+  <div class="board" [style.width.px]="viewSizePx" [style.height.px]="viewSizePx">
+    <div class="board-row" *ngFor="let row of board!.board" fxLayout="row" fxLayoutAlign="start center">
+      <app-board-cell *ngFor="let cell of row" [cell]="cell" (clickEvent)="onCellClick(cell)" [sizePx]="cellSizePx">
+      </app-board-cell>
+    </div>
+  </div>
+</div>

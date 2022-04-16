@@ -1,5 +1,9 @@
 <mat-toolbar color="primary">
   <span class="title">共円チェッカー</span>
+  <span class="spacer"></span>
+  <a mat-icon-button routerLink="/home">
+    <mat-icon>home</mat-icon>
+  </a>
 </mat-toolbar>
 <div class="container" [style.width.px]=(containerSizePx)>
   <div class="info-tiles" fxLayout="row" fxLayoutAlign="space-around center">
@@ -9,10 +13,6 @@
     <button mat-stroked-button fxFlex="20" (click)="reset()">Reset</button>
   </div>
   <div class="board">
-    <div class="board-row" *ngFor="let row of board.board">
-      <app-board-cell class="board-cell" *ngFor="let cell of row" [cell]="cell" (clickEvent)="onCellClick(cell)"
-        [sizePx]="cellSizePx()">
-      </app-board-cell>
-    </div>
+    <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
   </div>
 </div>

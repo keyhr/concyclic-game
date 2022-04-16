@@ -3,6 +3,7 @@
   height: 100px;
   margin: auto;
   position: relative;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .container * {

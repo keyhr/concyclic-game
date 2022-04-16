@@ -1,0 +1,6 @@
+.board {
+  width: max-content;
+  background-color: #d5d9f6;
+  border-radius: 5%;
+  /* margin: 5% 0px; */
+}

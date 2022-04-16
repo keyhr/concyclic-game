@@ -2,9 +2,14 @@
   font-family: "MPLUS2 Regular";
 }
 
+span.spacer {
+  flex: 1 1 auto;
+}
+
 .container {
   margin: auto;
   user-select: none;
+  display: block;
   -moz-user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
@@ -14,13 +19,6 @@
   margin: auto;
   text-align: center;
   margin-top: 5%;
-}
-
-.container .board {
-  width: max-content;
-  display: flex;
-  background-color: #d5d9f6;
-  border-radius: 5%;
 }
 
 .info-tiles {
@@ -37,8 +35,4 @@
   padding: 0.5ex;
   background-color: white;
   border-radius: 10px;
-}
-
-.board-cell {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
