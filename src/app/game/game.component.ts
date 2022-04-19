@@ -19,10 +19,6 @@ export class GameComponent implements OnInit {
   containerSizePx: number = 500;
 
   isJudgingConcyclic = false;
-  // isAutoJudgeEnabled = false;
-  isAutoJudgeEnabled = true;
-  isAfterAutoJudge = false;
-
   constructor(public dialog: MatDialog) {
     this.board = new Board(this.boardSize.x, this.boardSize.y);
   }
@@ -55,6 +51,7 @@ export class GameComponent implements OnInit {
       });
       return;
     }
+    this.board.clearSelection();
     const lastCell = this.cellHistory[this.cellHistory.length - 1];
     lastCell.toggleSelect();
     this.isJudgingConcyclic = true;
@@ -93,22 +90,42 @@ export class GameComponent implements OnInit {
     if (cell) cell!.isPut = false;
   }
 
+  // Auto Judge Part
+
+  // isAutoJudgeEnabled = false;
+  isAutoJudgeEnabled = true;
+  isAfterAutoJudge = false;
+  searchResult: Cell[][] = new Array();
+  resultIndex = 0;
+
   runAutoJudgeConcyclic(): void {
     const judger = new ConcyclicJudger(this.board.cellsPut());
-    const searchResult = judger.lightSearch();
+    this.searchResult = judger.lightSearch();
 
-    if (searchResult.length != 0) {
+    if (this.searchResult.length != 0) {
       this.dialog.open(MessageDialogComponent, {
         data: {
-          content: '共円です。下のボタンをおして再開してください。',
+          title: '共円',
+          content:
+            this.searchResult.length +
+            'セット共円があります。下のボタンをおして再開してください。',
         },
       });
-      const firstResult = searchResult[0];
-      for (const cell of firstResult) {
-        this.board.selectCell(cell.x, cell.y);
-      }
+      this.resultIndex = 0;
+      const firstResult = this.searchResult[this.resultIndex];
+      for (const cell of firstResult) this.board.selectCell(cell.x, cell.y);
       this.isAfterAutoJudge = true;
     }
+  }
+
+  updateResultView(a: number): void {
+    if (a == 1) this.resultIndex += 1;
+    else if (a == -1) this.resultIndex -= 1;
+
+    console.log(this.resultIndex);
+    this.board.clearSelection();
+    const result = this.searchResult[this.resultIndex];
+    for (const cell of result) this.board.selectCell(cell.x, cell.y);
   }
 
   afterAutoJudge() {

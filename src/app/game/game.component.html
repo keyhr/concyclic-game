@@ -16,24 +16,39 @@
   <div class="board">
     <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
   </div>
-  <div *ngIf="!isAutoJudgeEnabled">
+  <div *ngIf="!isAutoJudgeEnabled && !isAfterAutoJudge">
     <div class="toolbuttons" fxLayout="row" fxLayoutAlign="space-around center">
       <button *ngIf="!isJudgingConcyclic" mat-stroked-button fxFlex (click)="enterJudgeConcyclic()">共円宣言</button>
       <button *ngIf="isJudgingConcyclic && board.cellsSelected().length != 4" mat-stroked-button fxFlex
         (click)="cancelJudgeConcyclic()">キャンセル</button>
       <button *ngIf="isJudgingConcyclic && board.cellsSelected().length == 4" mat-stroked-button fxFlex
         (click)="judgeConcyclic()">共円判定</button>
-      <div *ngIf="!isJudgingConcyclic && cellHistory.length != 0" fxFlex="25" fxLayout="row"
+      <div *ngIf="!isJudgingConcyclic && cellHistory.length != 0" fxFlex="50" fxLayout="row"
         fxLayoutAlign="space-around center">
         <div fxFlex></div>
-        <button mat-stroked-button fxFlex="80" (click)="back()">一手戻る</button>
+        <button mat-stroked-button fxFlex="90" (click)="back()">一手戻る</button>
       </div>
     </div>
   </div>
-  <div *ngIf="isAutoJudgeEnabled">
-    <div class="toolbuttons" fxLayout="row" fxLayoutAlign="space-around center">
-      <button *ngIf="!isAfterAutoJudge" mat-stroked-button fxFlex (click)="back()">一手戻る</button>
-      <button *ngIf="isAfterAutoJudge" mat-stroked-button fxFlex (click)="afterAutoJudge()">最後の石を除いて再開</button>
+  <div *ngIf="isAutoJudgeEnabled || isAfterAutoJudge">
+    <div class="toolbuttons">
+      <button *ngIf="!isAfterAutoJudge" mat-stroked-button (click)="back()">一手戻る</button>
+      <div class="ajResultNavigator" *ngIf="isAfterAutoJudge" fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-icon-button *ngIf="resultIndex >= 1" (click)="updateResultView(-1)">
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <button mat-icon-button disabled *ngIf="resultIndex < 1">
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        {{resultIndex + 1}} / {{searchResult.length}} セット目
+        <button mat-icon-button *ngIf="resultIndex <= searchResult.length - 2" (click)="updateResultView(1)">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+        <button mat-icon-button disabled *ngIf="resultIndex > searchResult.length - 2">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
+      <button *ngIf="isAfterAutoJudge" mat-stroked-button (click)="afterAutoJudge()">最後の石を除いて再開</button>
     </div>
   </div>
 </div>

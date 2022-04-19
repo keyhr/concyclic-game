@@ -82,6 +82,10 @@ export class Board {
     this.board[y][x].enableSelect();
   }
 
+  clearSelection(): void {
+    for (const cell of this.cellsSelected()) cell.cancelSelect();
+  }
+
   clear(): void {
     for (const cell of this.cellsPut()) cell.clear();
   }
@@ -123,7 +127,7 @@ export class ConcyclicJudger {
     const result: Cell[][] = new Array();
     this.cellsTemp = new Array();
 
-    this.dfs(result, 0, 0);
+    this.dfs(result, 0, -1);
 
     return result;
   }

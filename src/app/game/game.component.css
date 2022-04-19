@@ -34,3 +34,13 @@
   color: #777777;
   background-color: white;
 }
+
+.ajResultNavigator {
+  margin-bottom: 5%;
+}
+
+.ajResultNavigator > button {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+}
