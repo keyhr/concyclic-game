@@ -1,5 +1,10 @@
 .title {
-  font-family: "MPLUS2 Regular";
+  /* font-family: "MPLUS2 Regular"; */
+}
+
+.message {
+  /* font-family: "MPLUS2 Regular"; */
+  font-size: .5rem;
 }
 
 span.spacer {
@@ -25,14 +30,14 @@ span.spacer {
   width: 100%;
   line-height: 100%;
   font-size: 2.5rem;
-  font-family: "MPLUS2 Regular";
+  /* font-family: "MPLUS2 Regular"; */
   text-align: center;
   color: #777777;
 }
 
 .judge {
   /* flex-basis: 70%; */
-  padding: 0.5ex;
+  padding: .5ex;
   background-color: white;
   border-radius: 10px;
 }

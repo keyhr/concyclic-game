@@ -1,27 +1,44 @@
 .container {
-  font-family: "MPLUS2 Regular";
+  /* font-family: "MPLUS2 Regular"; */
   border-radius: 100%;
-  background-color: #d5d9f6;
+  border: 20px solid #d5d9f6;
+  /* background-color: #d5d9f6; */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* padding: 3rem; */
 }
 
 .title {
-  font-family: "MPLUS2 Bold";
-  font-size: 4rem;
+  /* font-family: "MPLUS2 Bold"; */
+  font-weight: bold;
+  font-size: 3rem;
   line-height: 100%;
-  margin-top: 4rem;
+  margin: 4rem;
 }
 
-.navlinks * {
-  font-size: 2rem;
+.navlinks a {
+  font-size: 1.5rem;
   line-height: 5rem;
   width: 100%;
   height: 5rem;
+  padding: 0px 30px;
   margin-bottom: 0.5em;
   vertical-align: middle;
-  background-color: white;
+  /* background-color: white; */
+}
+
+@media screen and (max-width: 1024px) {
+
+  .title {
+    font-size: 300%;
+    margin: 10%;
+  }
+
+  .navlinks a {
+    font-size: 1rem;
+    line-height: 4rem;
+    height: 4rem;
+  }
+
 }

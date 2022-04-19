@@ -1,15 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Board, Cell } from '../board';
 
-type CellClickEventHandler = (cell: Cell) => void;
-
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-
   @Input() board?: Board;
   @Output() cellClickEvent = new EventEmitter<Cell>();
 
@@ -27,5 +24,4 @@ export class BoardComponent implements OnInit {
   onCellClick(cell: Cell) {
     this.cellClickEvent.emit(cell);
   }
-
 }
