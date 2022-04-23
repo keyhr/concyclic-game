@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
-  <span class="title">共円チェッカー</span>
+  <span>共円チェッカー</span>
   <span class="spacer"></span>
-  <span class="message">ゲームモードもあるよ→</span>
+  <mat-slide-toggle [(ngModel)]="isRequiredNewVersion"></mat-slide-toggle>
   <a mat-icon-button routerLink="/home">
     <mat-icon>home</mat-icon>
   </a>
 </mat-toolbar>
-<div class="container" [style.width.px]=(containerSizePx)>
+<div *ngIf="!isRequiredNewVersion" class="container" [style.width.px]=(containerSizePx)>
   <div class="info-tiles" fxLayout="row" fxLayoutAlign="space-around center">
     <div fxFlex></div>
     <div class="judge" fxFlex="60" [style.color]="judge.fontColor">{{judge.content}}</div>
@@ -15,5 +15,33 @@
   </div>
   <div class="board">
     <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
+  </div>
+</div>
+<div *ngIf="isRequiredNewVersion" class="container" [style.width.px]=(containerSizePx)>
+  <div class="board">
+    <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
+  </div>
+  <div class="resultNavigator">
+    <button mat-icon-button *ngIf="resultIndex >= 0" (click)="updateResultView(-1)">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-icon-button disabled *ngIf="resultIndex < 0">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <span *ngIf="searchResult.length != 0 && resultIndex >= 0">
+      {{resultIndex + 1}} / {{searchResult.length}} セット目
+    </span>
+    <span *ngIf="searchResult.length != 0 && resultIndex == -1">
+      {{searchResult.length}} セット
+    </span>
+    <span *ngIf="searchResult.length == 0">
+      共円なし
+    </span>
+    <button mat-icon-button *ngIf="resultIndex <= searchResult.length - 2" (click)="updateResultView(1)">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+    <button mat-icon-button disabled *ngIf="resultIndex > searchResult.length - 2">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
   </div>
 </div>
