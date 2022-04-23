@@ -123,20 +123,13 @@ export class ConcyclicJudger {
     this.cellsToSearch = cellsToSearch;
   }
 
-  fullSearch(): Cell[][] {
+  fullSearch(fixed: Cell[] = new Array()): Cell[][] {
     const result: Cell[][] = new Array();
     this.cellsTemp = new Array();
 
-    this.dfs(result, 0, -1);
+    this.cellsTemp.push(...fixed);
 
-    return result;
-  }
-
-  lightSearch(): Cell[][] {
-    const result: Cell[][] = new Array();
-    this.cellsTemp = new Array();
-
-    this.dfs(result, 0, -1, true);
+    this.dfs(result, fixed.length, -1);
 
     return result;
   }
@@ -145,19 +138,17 @@ export class ConcyclicJudger {
     result: Cell[][],
     depth: number,
     a: number,
-    light: boolean = false
   ): void {
     if (depth == 4) {
       if (isConcyclic(this.cellsTemp)) {
         let temp: Cell[] = new Array();
         for (let cell of this.cellsTemp) temp.push(new Cell(cell.x, cell.y));
         result.push(temp);
-        if (light) return;
       }
     } else {
       for (let i = a + 1; i < this.cellsToSearch.length; ++i) {
         this.cellsTemp[depth] = this.cellsToSearch[i];
-        this.dfs(result, depth + 1, i, light);
+        this.dfs(result, depth + 1, i);
       }
     }
   }

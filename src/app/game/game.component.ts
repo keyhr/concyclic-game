@@ -99,8 +99,9 @@ export class GameComponent implements OnInit {
   resultIndex = 0;
 
   runAutoJudgeConcyclic(): void {
-    const judger = new ConcyclicJudger(this.board.cellsPut());
-    this.searchResult = judger.lightSearch();
+    const lastCell = this.cellHistory[this.cellHistory.length - 1];
+    const judger = new ConcyclicJudger(this.board.cellsPut().filter(cell => cell != lastCell));
+    this.searchResult = judger.fullSearch([lastCell]);
 
     if (this.searchResult.length != 0) {
       this.dialog.open(MessageDialogComponent, {
