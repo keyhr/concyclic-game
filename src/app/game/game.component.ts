@@ -19,12 +19,16 @@ export class GameComponent implements OnInit {
   containerSizePx: number = 500;
 
   isJudgingConcyclic = false;
+  isBoardModeEnabled = false;
+  isLabelDisplayEnabled = true;
+
   constructor(public dialog: MatDialog) {
     this.board = new Board(this.boardSize.x, this.boardSize.y);
+    if (window.innerWidth < 600) this.containerSizePx = window.innerWidth * 0.9;
   }
 
   ngOnInit(): void {
-    if (window.innerWidth < 600) this.containerSizePx = window.innerWidth * 0.8;
+    console.log(this.containerSizePx);
   }
 
   onCellClick(cell: Cell): void {
@@ -93,8 +97,7 @@ export class GameComponent implements OnInit {
 
   // Auto Judge Part
 
-  // isAutoJudgeEnabled = false;
-  isAutoJudgeEnabled = true;
+  isAutoJudgeEnabled = false;
   isAfterAutoJudge = false;
   searchResult: Cell[][] = new Array();
   resultIndex = 0;

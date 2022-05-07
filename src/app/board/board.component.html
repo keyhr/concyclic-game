@@ -1,6 +1,16 @@
 <div *ngIf="board">
   <div class="board" [style.width.px]="viewSizePx" [style.height.px]="viewSizePx">
-    <div class="board-row" *ngFor="let row of board!.board" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div [style.width.px]="guideThicknessPx"></div>
+      <div class="board-guide" *ngFor="let _ of board!.board[0]; index as x" [style.width.px]="cellSizePx"
+        [style.height.px]="guideThicknessPx">
+        <div *ngIf="labelDisplay">{{utils.alphabetIndex(x)}}</div>
+      </div>
+    </div>
+    <div class="board-row" *ngFor="let row of board!.board; index as y" fxLayout="row" fxLayoutAlign="start center">
+      <div class="board-guide" [style.width.px]="guideThicknessPx">
+        <div *ngIf="labelDisplay">{{y + 1}}</div>
+      </div>
       <app-board-cell *ngFor="let cell of row" [cell]="cell" (clickEvent)="onCellClick(cell)" [sizePx]="cellSizePx">
       </app-board-cell>
     </div>

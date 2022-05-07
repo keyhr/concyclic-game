@@ -6,7 +6,7 @@
     <mat-icon>home</mat-icon>
   </a>
 </mat-toolbar>
-<div *ngIf="!isRequiredNewVersion" class="container" [style.width.px]=(containerSizePx)>
+<div *ngIf="!isRequiredNewVersion" class="container" [style.width.px]="containerSizePx">
   <div class="info-tiles" fxLayout="row" fxLayoutAlign="space-around center">
     <div fxFlex></div>
     <div class="judge" fxFlex="60" [style.color]="judge.fontColor">{{judge.content}}</div>
@@ -17,9 +17,10 @@
     <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
   </div>
 </div>
-<div *ngIf="isRequiredNewVersion" class="container" [style.width.px]=(containerSizePx)>
+<div *ngIf="isRequiredNewVersion" class="container" [style.width.px]="containerSizePx">
   <div class="board">
-    <app-board [board]="board" (cellClickEvent)="onCellClick($event)"></app-board>
+    <app-board [board]="board" [labelDisplay]="false" [viewSizePx]="containerSizePx"
+      (cellClickEvent)="onCellClick($event)"></app-board>
   </div>
   <div class="resultNavigator">
     <button mat-icon-button *ngIf="resultIndex >= 0" (click)="updateResultView(-1)">
