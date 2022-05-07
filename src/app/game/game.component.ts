@@ -35,8 +35,8 @@ export class GameComponent implements OnInit {
       if (cell.isSelected || this.board.cellsSelected().length < 4)
         cell.toggleSelect();
     } else {
+      if (!cell.isPut) this.cellHistory.push(cell);
       cell.isPut = true;
-      this.cellHistory.push(cell);
       if (this.isAutoJudgeEnabled) this.runAutoJudgeConcyclic();
     }
   }
@@ -53,6 +53,7 @@ export class GameComponent implements OnInit {
     }
     this.board.clearSelection();
     const lastCell = this.cellHistory[this.cellHistory.length - 1];
+    console.log(this.cellHistory);
     lastCell.toggleSelect();
     this.isJudgingConcyclic = true;
   }
@@ -100,7 +101,9 @@ export class GameComponent implements OnInit {
 
   runAutoJudgeConcyclic(): void {
     const lastCell = this.cellHistory[this.cellHistory.length - 1];
-    const judger = new ConcyclicJudger(this.board.cellsPut().filter(cell => cell != lastCell));
+    const judger = new ConcyclicJudger(
+      this.board.cellsPut().filter((cell) => cell != lastCell)
+    );
     this.searchResult = judger.fullSearch([lastCell]);
 
     if (this.searchResult.length != 0) {
