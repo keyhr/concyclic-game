@@ -4,6 +4,10 @@ body {
   background-color: #f5f5f5;
 }
 
+html {
+  touch-action: manipulation;
+}
+
 html,
 body {
   height: 100%;
